@@ -1,0 +1,128 @@
+/* General Styles */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Text shadow for better contrast on image backgrounds */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Navbar styles */
+.brand-logo {
+  padding-left: 10px;
+}
+
+/* Card styles */
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  color: #00897b;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+  color: #4db6ac;
+}
+
+/* Button styles */
+.btn, .btn-large {
+  background-color: #00897b;
+}
+
+.btn:hover, .btn-large:hover {
+  background-color: #00695c;
+}
+
+/* Form styles */
+input:focus {
+  border-bottom: 1px solid #00897b !important;
+  box-shadow: 0 1px 0 0 #00897b !important;
+}
+
+input:focus + label {
+  color: #00897b !important;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color: #00897b;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: 2px solid #00897b;
+}
+
+.select-wrapper input.select-dropdown:focus {
+  border-bottom: 1px solid #00897b !important;
+}
+
+/* Dashboard styles */
+.collection .collection-item.avatar i.circle {
+  background-color: #00897b;
+}
+
+/* Footer styles */
+.page-footer {
+  margin-top: 40px;
+}
+
+/* Calendar styles for booking */
+.date-time-picker {
+  margin-top: 15px;
+}
+
+/* Pet card styles */
+.pet-card {
+  transition: all 0.3s ease;
+}
+
+.pet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Service card styles */
+.service-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card .card-content {
+  flex-grow: 1;
+}
+
+/* Appointment table styles */
+.appointment-status {
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+}
+
+.status-scheduled {
+  background-color: #2196F3;
+}
+
+.status-completed {
+  background-color: #4CAF50;
+}
+
+.status-cancelled {
+  background-color: #9E9E9E;
+}

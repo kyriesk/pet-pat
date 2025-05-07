@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <h4 class="center-align teal-text text-darken-2">My Profile</h4>
+
+            <div class="row">
+                <div class="col s12 center">
+                    <i class="material-icons large teal-text">account_circle</i>
+                    <h5>
+                        <%= user.name %>
+                    </h5>
+                    <p class="grey-text">
+                        <%= user.email %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row" style="margin-top: 20px;">
+                <form action="/users/profile?_method=PUT" method="POST">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="name" name="name" type="text" class="validate" value="<%= user.name %>" required>
+                            <label for="name">Full Name</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" name="email" type="email" class="validate" value="<%= user.email %>"
+                                required>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="phone" name="phone" type="tel" class="validate" value="<%= user.phone || '' %>">
+                            <label for="phone">Phone Number</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="address" name="address"
+                                class="materialize-textarea"><%= user.address || '' %></textarea>
+                            <label for="address">Address</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light teal darken-2 btn-large"
+                                style="width: 100%;">
+                                Update Profile
+                                <i class="material-icons right">save</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col s12">
+                    <h5>Account Options</h5>
+                    <p>Want to change your password?</p>
+                    <a href="/users/change-password" class="btn waves-effect waves-light orange">
+                        <i class="material-icons left">lock</i>
+                        Change Password
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var textareas = document.querySelectorAll('.materialize-textarea');
+        M.textareaAutoResize(textareas);
+        M.updateTextFields();
+    });
+</script>

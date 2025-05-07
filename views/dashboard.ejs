@@ -1,0 +1,213 @@
+<div class="row">
+    <div class="col s12">
+        <h3>Welcome, <%= user.name %>
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Quick Actions Card -->
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Quick Actions</span>
+                <div class="collection">
+                    <a href="/pets/add" class="collection-item teal-text">
+                        <i class="material-icons left">add_circle</i>Add a Pet
+                    </a>
+                    <a href="/appointments/book" class="collection-item teal-text">
+                        <i class="material-icons left">event_available</i>Book Appointment
+                    </a>
+                    <a href="/appointments" class="collection-item teal-text">
+                        <i class="material-icons left">event_note</i>View Appointments
+                    </a>
+                    <a href="/users/profile" class="collection-item teal-text">
+                        <i class="material-icons left">person</i>Update Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Pets Card -->
+    <div class="col s12 m8">
+        <h4>My Pets</h4>
+        <div class="pets-container">
+            <% if (typeof pets !=='undefined' && pets.length> 0) { %>
+                <div class="row">
+                    <% pets.forEach(function(pet) { %>
+                        <div class="col s12 m6">
+                            <div class="card horizontal">
+                                <div class="card-image">
+                                    <i class="material-icons medium teal-text" style="margin: 15px;">pets</i>
+                                </div>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <h5>
+                                            <%= pet.name %>
+                                        </h5>
+                                        <p><strong>Type:</strong>
+                                            <%= pet.type %>
+                                        </p>
+                                        <% if (pet.breed) { %>
+                                            <p><strong>Breed:</strong>
+                                                <%= pet.breed %>
+                                            </p>
+                                            <% } %>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="/pets/<%= pet._id %>" class="teal-text">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+                <% } else { %>
+                    <div class="card-panel">
+                        <p>You haven't added any pets yet. <a href="/pets/add" class="teal-text">Add your first pet</a>
+                            to book grooming appointments.</p>
+                    </div>
+                    <% } %>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <a href="/pets" class="btn waves-effect waves-light teal">
+                                    View All Pets
+                                    <i class="material-icons right">arrow_forward</i>
+                                </a>
+                                <a href="/pets/add" class="btn waves-effect waves-light teal lighten-1">
+                                    <i class="material-icons left">add</i>
+                                    Add New Pet
+                                </a>
+                            </div>
+                        </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Upcoming Appointments -->
+    <div class="col s12">
+        <h4>Upcoming Appointments</h4>
+        <% if (typeof appointments !=='undefined' && appointments.length> 0) { %>
+            <table class="striped responsive-table">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Pet</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% appointments.forEach(function(appointment) { %>
+                        <tr>
+                            <td>
+                                <%= appointment.formattedDate %>
+                            </td>
+                            <td>
+                                <%= appointment.pet.name %>
+                            </td>
+                            <td>
+                                <%= appointment.service.name %>
+                            </td>
+                            <td>
+                                <% if (appointment.status==='scheduled' ) { %>
+                                    <span class="new badge blue" data-badge-caption="Scheduled"></span>
+                                    <% } else if (appointment.status==='completed' ) { %>
+                                        <span class="new badge green" data-badge-caption="Completed"></span>
+                                        <% } else { %>
+                                            <span class="new badge grey" data-badge-caption="Cancelled"></span>
+                                            <% } %>
+                            </td>
+                            <td>
+                                <a href="/appointments/<%= appointment._id %>"
+                                    class="btn-small teal waves-effect waves-light">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                                <% if (appointment.status==='scheduled' ) { %>
+                                    <a href="/appointments/<%= appointment._id %>/edit"
+                                        class="btn-small orange waves-effect waves-light">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <form action="/appointments/<%= appointment._id %>/cancel?_method=PUT" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn-small red waves-effect waves-light"
+                                            onclick="return confirm('Are you sure you want to cancel this appointment?')">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
+                                    </form>
+                                    <% } %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <div class="card-panel">
+                    <p>You have no upcoming appointments. <a href="/appointments/book" class="teal-text">Book an
+                            appointment</a> for your pet.</p>
+                </div>
+                <% } %>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col s12">
+                            <a href="/appointments" class="btn waves-effect waves-light teal">
+                                View All Appointments
+                                <i class="material-icons right">arrow_forward</i>
+                            </a>
+                            <a href="/appointments/book" class="btn waves-effect waves-light teal lighten-1">
+                                <i class="material-icons left">add</i>
+                                Book New Appointment
+                            </a>
+                        </div>
+                    </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Latest Services -->
+    <div class="col s12">
+        <h4>Featured Services</h4>
+        <div class="row">
+            <% if (typeof services !=='undefined' && services.length> 0) { %>
+                <% services.slice(0, 3).forEach(function(service) { %>
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">
+                                    <%= service.name %>
+                                </span>
+                                <p>
+                                    <%= service.description %>
+                                </p>
+                                <p class="teal-text">$<%= service.price.toFixed(2) %>
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="/services/<%= service._id %>" class="teal-text">Learn More</a>
+                                <a href="/appointments/book" class="teal-text">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <div class="col s12">
+                                <div class="card-panel">
+                                    <p>Check out our <a href="/services" class="teal-text">services page</a> to see what
+                                        grooming services we offer.</p>
+                                </div>
+                            </div>
+                            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems);
+    });
+</script>
