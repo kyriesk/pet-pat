@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <h4 class="center-align teal-text text-darken-2">Edit Pet</h4>
+            <form action="/pets/<%= pet._id %>?_method=PUT" method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" class="validate" value="<%= pet.name %>" required>
+                        <label for="name">Pet Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="type" name="type" required>
+                            <option value="" disabled>Choose pet type</option>
+                            <option value="dog" <%=pet.type==='dog' ? 'selected' : '' %>>Dog</option>
+                            <option value="cat" <%=pet.type==='cat' ? 'selected' : '' %>>Cat</option>
+                            <option value="bird" <%=pet.type==='bird' ? 'selected' : '' %>>Bird</option>
+                            <option value="rabbit" <%=pet.type==='rabbit' ? 'selected' : '' %>>Rabbit</option>
+                            <option value="other" <%=pet.type==='other' ? 'selected' : '' %>>Other</option>
+                        </select>
+                        <label>Pet Type</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="breed" name="breed" type="text" class="validate" value="<%= pet.breed || '' %>">
+                        <label for="breed">Breed (optional)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="age" name="age" type="number" min="0" step="0.1" class="validate"
+                            value="<%= pet.age || '' %>">
+                        <label for="age">Age (years)</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="weight" name="weight" type="number" min="0" step="0.1" class="validate"
+                            value="<%= pet.weight || '' %>">
+                        <label for="weight">Weight (kg)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="specialNotes" name="specialNotes"
+                            class="materialize-textarea"><%= pet.specialNotes || '' %></textarea>
+                        <label for="specialNotes">Special Notes (allergies, behavior, etc.)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <button type="submit" class="btn waves-effect waves-light teal darken-2 btn-large"
+                            style="width: 100%;">
+                            Update Pet
+                            <i class="material-icons right">pets</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col s12 center">
+                    <a href="/pets" class="teal-text text-darken-2">
+                        <i class="material-icons left">arrow_back</i>Back to My Pets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+
+        // Initialize textarea
+        var textareas = document.querySelectorAll('.materialize-textarea');
+        M.textareaAutoResize(textareas);
+    });
+</script>

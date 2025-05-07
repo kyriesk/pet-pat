@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <h4 class="center-align teal-text text-darken-2">Add New Pet</h4>
+            <form action="/pets" method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" class="validate" required>
+                        <label for="name">Pet Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="type" name="type" required>
+                            <option value="" disabled selected>Choose pet type</option>
+                            <option value="dog">Dog</option>
+                            <option value="cat">Cat</option>
+                            <option value="bird">Bird</option>
+                            <option value="rabbit">Rabbit</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label>Pet Type</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="breed" name="breed" type="text" class="validate">
+                        <label for="breed">Breed (optional)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="age" name="age" type="number" min="0" step="0.1" class="validate">
+                        <label for="age">Age (years)</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="weight" name="weight" type="number" min="0" step="0.1" class="validate">
+                        <label for="weight">Weight (kg)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="specialNotes" name="specialNotes" class="materialize-textarea"></textarea>
+                        <label for="specialNotes">Special Notes (allergies, behavior, etc.)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <button type="submit" class="btn waves-effect waves-light teal darken-2 btn-large"
+                            style="width: 100%;">
+                            Add Pet
+                            <i class="material-icons right">pets</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col s12 center">
+                    <a href="/pets" class="teal-text text-darken-2">
+                        <i class="material-icons left">arrow_back</i>Back to My Pets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+
+        // Initialize textarea
+        var textareas = document.querySelectorAll('.materialize-textarea');
+        M.textareaAutoResize(textareas);
+    });
+</script>

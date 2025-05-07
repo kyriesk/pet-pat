@@ -1,0 +1,33 @@
+<% if(typeof errors !=='undefined' && errors.length> 0) { %>
+    <div class="card-panel red lighten-4">
+        <% errors.forEach(function(error) { %>
+            <div class="red-text">
+                <%= error.msg %>
+            </div>
+            <% }); %>
+    </div>
+    <% } %>
+
+        <% if(typeof success_msg !=='undefined' && success_msg && success_msg !=='' ) { %>
+            <div class="card-panel green lighten-4">
+                <div class="green-text">
+                    <%= success_msg %>
+                </div>
+            </div>
+            <% } %>
+
+                <% if(typeof error_msg !=='undefined' && error_msg && error_msg !=='' ) { %>
+                    <div class="card-panel red lighten-4">
+                        <div class="red-text">
+                            <%= error_msg %>
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <!-- <% if(typeof error !=='undefined' && error && error !=='' ) { %>
+                            <div class="card-panel red lighten-4">
+                                <div class="red-text">
+                                    <%= error %>
+                                </div>
+                            </div>
+                            <% } %> -->

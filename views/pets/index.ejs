@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col s12">
+        <h3>My Pets</h3>
+        <p>View and manage your pet profiles.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 right-align" style="margin-bottom: 20px;">
+        <a href="/pets/add" class="btn waves-effect waves-light teal">
+            <i class="material-icons left">add</i>Add New Pet
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <% if(pets.length> 0) { %>
+        <% pets.forEach(function(pet) { %>
+            <div class="col s12 m6 l4">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <div class="center">
+                            <% if(pet.type==='dog' ) { %>
+                                <i class="material-icons medium teal-text">pets</i>
+                                <% } else if(pet.type==='cat' ) { %>
+                                    <i class="material-icons medium teal-text">content_cut</i>
+                                    <% } else if(pet.type==='bird' ) { %>
+                                        <i class="material-icons medium teal-text">flight</i>
+                                        <% } else { %>
+                                            <i class="material-icons medium teal-text">pets</i>
+                                            <% } %>
+                        </div>
+                        <span class="card-title center-align">
+                            <%= pet.name %>
+                        </span>
+                        <div class="divider" style="margin: 10px 0;"></div>
+                        <p><strong>Type:</strong>
+                            <%= pet.type.charAt(0).toUpperCase() + pet.type.slice(1) %>
+                        </p>
+
+                        <% if(pet.breed) { %>
+                            <p><strong>Breed:</strong>
+                                <%= pet.breed %>
+                            </p>
+                            <% } %>
+
+                                <% if(pet.age) { %>
+                                    <p><strong>Age:</strong>
+                                        <%= pet.age %> years
+                                    </p>
+                                    <% } %>
+                    </div>
+                    <div class="card-action">
+                        <div class="row" style="margin-bottom: 0;">
+                            <div class="col s12 center-align">
+                                <a href="/pets/<%= pet._id %>" class="teal-text text-darken-2">View Details</a>
+                                <a href="/pets/<%= pet._id %>/edit" class="orange-text text-darken-2">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <div class="col s12">
+                        <div class="card-panel center">
+                            <i class="material-icons large teal-text text-lighten-2">pets</i>
+                            <h5>No Pets Added Yet</h5>
+                            <p>Get started by adding your first pet to book grooming appointments.</p>
+                            <a href="/pets/add" class="btn-large waves-effect waves-light teal"
+                                style="margin-top: 20px;">
+                                <i class="material-icons left">add</i>Add Your First Pet
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+</div>
+
+<script>
+    // Equal height cards
+    document.addEventListener('DOMContentLoaded', function () {
+        equalizeCardHeights();
+
+        function equalizeCardHeights() {
+            let maxHeight = 0;
+            const cardContents = document.querySelectorAll('.card .card-content');
+
+            // Reset heights
+            cardContents.forEach(content => {
+                content.style.height = 'auto';
+            });
+
+            // Find max height
+            cardContents.forEach(content => {
+                if (content.offsetHeight > maxHeight) {
+                    maxHeight = content.offsetHeight;
+                }
+            });
+
+            // Set all to max height
+            cardContents.forEach(content => {
+                content.style.height = maxHeight + 'px';
+            });
+        }
+
+        // Recalculate on window resize
+        window.addEventListener('resize', equalizeCardHeights);
+    });
+</script>

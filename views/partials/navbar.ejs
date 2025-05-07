@@ -1,0 +1,48 @@
+<nav class="teal darken-2">
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">
+            <i class="material-icons left">pets</i>Pet-Pat
+        </a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/services">Services</a></li>
+            <% if(locals.user) { %>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/pets">My Pets</a></li>
+                <li><a href="/appointments">My Appointments</a></li>
+                <li>
+                    <a class="dropdown-trigger" href="#!" data-target="user-dropdown">
+                        <%= user.name %><i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
+                <% } else { %>
+                    <li><a href="/users/login">Login</a></li>
+                    <li><a href="/users/register">Register</a></li>
+                    <% } %>
+        </ul>
+    </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="user-dropdown" class="dropdown-content">
+    <li><a href="/users/profile"><i class="material-icons">person</i>Profile</a></li>
+    <li class="divider"></li>
+    <li><a href="/users/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+</ul>
+
+<!-- Mobile Navigation -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/services">Services</a></li>
+    <% if(locals.user) { %>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/pets">My Pets</a></li>
+        <li><a href="/appointments">My Appointments</a></li>
+        <li><a href="/users/profile">Profile</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+        <% } else { %>
+            <li><a href="/users/login">Login</a></li>
+            <li><a href="/users/register">Register</a></li>
+            <% } %>
+</ul>

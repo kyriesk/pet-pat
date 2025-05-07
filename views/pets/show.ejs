@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12 m3 center-align">
+                        <i class="material-icons large teal-text">pets</i>
+                    </div>
+                    <div class="col s12 m9">
+                        <span class="card-title">
+                            <%= pet.name %>
+                        </span>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <p><strong>Type:</strong>
+                                <%= pet.type.charAt(0).toUpperCase() + pet.type.slice(1) %>
+                            </p>
+
+                            <% if(pet.breed) { %>
+                                <p><strong>Breed:</strong>
+                                    <%= pet.breed %>
+                                </p>
+                                <% } %>
+
+                                    <% if(pet.age) { %>
+                                        <p><strong>Age:</strong>
+                                            <%= pet.age %> years
+                                        </p>
+                                        <% } %>
+
+                                            <% if(pet.weight) { %>
+                                                <p><strong>Weight:</strong>
+                                                    <%= pet.weight %> kg
+                                                </p>
+                                                <% } %>
+
+                                                    <% if(pet.specialNotes) { %>
+                                                        <div class="section">
+                                                            <h6><strong>Special Notes:</strong></h6>
+                                                            <p>
+                                                                <%= pet.specialNotes %>
+                                                            </p>
+                                                        </div>
+                                                        <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="col s12 m6">
+                        <a href="/pets/<%= pet._id %>/edit" class="btn waves-effect waves-light orange">
+                            <i class="material-icons left">edit</i>Edit
+                        </a>
+                        <a href="#delete-modal" class="btn waves-effect waves-light red modal-trigger">
+                            <i class="material-icons left">delete</i>Delete
+                        </a>
+                    </div>
+                    <div class="col s12 m6 right-align">
+                        <a href="/appointments/book" class="btn waves-effect waves-light teal">
+                            <i class="material-icons left">event_available</i>Book Appointment
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pet History Section -->
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Appointment History</span>
+                <% if (typeof appointments !=='undefined' && appointments.length> 0) { %>
+                    <ul class="collection">
+                        <% appointments.forEach(function(appointment) { %>
+                            <li class="collection-item">
+                                <div>
+                                    <%= appointment.formattedDate %> - <%= appointment.service.name %>
+                                            <span class="secondary-content">
+                                                <% if (appointment.status==='scheduled' ) { %>
+                                                    <span class="new badge blue" data-badge-caption="Scheduled"></span>
+                                                    <% } else if (appointment.status==='completed' ) { %>
+                                                        <span class="new badge green"
+                                                            data-badge-caption="Completed"></span>
+                                                        <% } else { %>
+                                                            <span class="new badge grey"
+                                                                data-badge-caption="Cancelled"></span>
+                                                            <% } %>
+                                            </span>
+                                </div>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <p>No appointment history found for this pet.</p>
+                        <% } %>
+            </div>
+        </div>
+
+        <div class="center-align" style="margin-top: 20px;">
+            <a href="/pets" class="btn-flat waves-effect waves-teal">
+                <i class="material-icons left">arrow_back</i>Back to My Pets
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="delete-modal" class="modal">
+    <div class="modal-content">
+        <h4>Confirm Delete</h4>
+        <p>Are you sure you want to delete <%= pet.name %>? This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+        <form action="/pets/<%= pet._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn waves-effect waves-light red">
+                Delete Pet
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    });
+</script>
