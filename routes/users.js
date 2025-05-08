@@ -2,8 +2,12 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const passportConfig = require("../config/passport");
 const { ensureAuthenticated, ensureGuest } = require("../middleware/auth");
 const User = require("../models/User");
+
+// Initialize passport configuration
+passportConfig(passport);
 
 // @desc    Show Register page
 // @route   GET /users/register
@@ -65,21 +69,10 @@ router.post("/register", ensureGuest, async (req, res) => {
           phone,
         });
 
-        // Hash password
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, async (err, hash) => {
-            if (err) throw err;
-
-            // Set hashed password
-            newUser.password = hash;
-
-            // Save user
-            await newUser.save();
-
-            req.session.success_msg = "You are now registered and can log in";
-            res.redirect("/users/login");
-          });
-        });
+        // Save user
+        await newUser.save();
+        req.session.success_msg = "You are now registered and can log in";
+        res.redirect("/users/login");
       }
     } catch (err) {
       console.error(err);
@@ -99,10 +92,22 @@ router.get("/login", ensureGuest, (req, res) => {
 // @desc    Process Login form
 // @route   POST /users/login
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/users/login",
-    failureMessage: true,
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      req.flash("error", info.message);
+      return res.redirect("/users/login");
+    }
+    req.logIn(user, (err) => {
+      
+      if (err) {
+        return next(err);
+      }
+      console.log("req.logIn", err, user, info);
+      return res.redirect("/dashboard");
+    });
   })(req, res, next);
 });
 

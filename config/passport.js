@@ -19,15 +19,13 @@ module.exports = function (passport) {
             });
           }
 
-          // Match password
-          bcrypt.compare(password, user.password, (err, isMatch) => {
-            if (err) throw err;
-            if (isMatch) {
-              return done(null, user);
-            } else {
-              return done(null, false, { message: "Password incorrect" });
-            }
-          });
+          // Match password using the User model's method
+          const isMatch = await user.matchPassword(password);
+          if (isMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false, { message: "Password incorrect" });
+          }
         } catch (err) {
           console.error(err);
           return done(err);
