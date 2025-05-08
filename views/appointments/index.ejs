@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col s12">
+        <h3>My Appointments</h3>
+        <p>View and manage your pet grooming appointments.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 right-align" style="margin-bottom: 20px;">
+        <a href="/appointments/book" class="btn waves-effect waves-light teal">
+            <i class="material-icons left">add</i>Book New Appointment
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s4"><a class="active" href="#upcoming">Upcoming</a></li>
+            <li class="tab col s4"><a href="#past">Past</a></li>
+            <li class="tab col s4"><a href="#cancelled">Cancelled</a></li>
+        </ul>
+    </div>
+
+    <!-- Upcoming Appointments Tab -->
+    <div id="upcoming" class="col s12">
+        <% const upcomingAppointments=appointments.filter(appointment=>
+            new Date(appointment.date) >= new Date() && appointment.status === 'scheduled'
+            );
+            %>
+
+            <% if(upcomingAppointments.length> 0) { %>
+                <div class="collection">
+                    <% upcomingAppointments.forEach(function(appointment) { %>
+                        <a href="/appointments/<%= appointment._id %>" class="collection-item avatar">
+                            <% if(appointment.pet.type==='dog' ) { %>
+                                <i class="material-icons circle teal">pets</i>
+                                <% } else if(appointment.pet.type==='cat' ) { %>
+                                    <i class="material-icons circle teal">content_cut</i>
+                                    <% } else { %>
+                                        <i class="material-icons circle teal">pets</i>
+                                        <% } %>
+                                            <span class="title"><b>
+                                                    <%= appointment.pet.name %>
+                                                </b> - <%= appointment.service.name %></span>
+                                            <p>
+                                                <%= appointment.formattedDate %><br>
+                                                    <% if(appointment.notes) { %>
+                                                        Note: <%= appointment.notes %>
+                                                            <% } %>
+                                            </p>
+                                            <span class="secondary-content">
+                                                <span class="new badge blue" data-badge-caption="">Scheduled</span>
+                                            </span>
+                        </a>
+                        <% }) %>
+                </div>
+                <% } else { %>
+                    <div class="card-panel center-align">
+                        <i class="material-icons medium teal-text">event_available</i>
+                        <p>You don't have any upcoming appointments.</p>
+                        <a href="/appointments/book" class="btn waves-effect waves-light teal">Book Now</a>
+                    </div>
+                    <% } %>
+    </div>
+
+    <!-- Past Appointments Tab -->
+    <div id="past" class="col s12">
+        <% const pastAppointments=appointments.filter(appointment=>
+            new Date(appointment.date) < new Date() && appointment.status !=='cancelled' ); %>
+
+                <% if(pastAppointments.length> 0) { %>
+                    <div class="collection">
+                        <% pastAppointments.forEach(function(appointment) { %>
+                            <a href="/appointments/<%= appointment._id %>" class="collection-item avatar">
+                                <% if(appointment.pet.type==='dog' ) { %>
+                                    <i class="material-icons circle grey">pets</i>
+                                    <% } else if(appointment.pet.type==='cat' ) { %>
+                                        <i class="material-icons circle grey">content_cut</i>
+                                        <% } else { %>
+                                            <i class="material-icons circle grey">pets</i>
+                                            <% } %>
+                                                <span class="title"><b>
+                                                        <%= appointment.pet.name %>
+                                                    </b> - <%= appointment.service.name %></span>
+                                                <p>
+                                                    <%= appointment.formattedDate %><br>
+                                                        <% if(appointment.notes) { %>
+                                                            Note: <%= appointment.notes %>
+                                                                <% } %>
+                                                </p>
+                                                <span class="secondary-content">
+                                                    <span class="new badge green" data-badge-caption="">Completed</span>
+                                                </span>
+                            </a>
+                            <% }) %>
+                    </div>
+                    <% } else { %>
+                        <div class="card-panel center-align">
+                            <i class="material-icons medium grey-text">history</i>
+                            <p>No past appointments found.</p>
+                        </div>
+                        <% } %>
+    </div>
+
+    <!-- Cancelled Appointments Tab -->
+    <div id="cancelled" class="col s12">
+        <% const cancelledAppointments=appointments.filter(appointment=>
+            appointment.status === 'cancelled'
+            );
+            %>
+
+            <% if(cancelledAppointments.length> 0) { %>
+                <div class="collection">
+                    <% cancelledAppointments.forEach(function(appointment) { %>
+                        <a href="/appointments/<%= appointment._id %>" class="collection-item avatar">
+                            <% if(appointment.pet.type==='dog' ) { %>
+                                <i class="material-icons circle red lighten-2">pets</i>
+                                <% } else if(appointment.pet.type==='cat' ) { %>
+                                    <i class="material-icons circle red lighten-2">content_cut</i>
+                                    <% } else { %>
+                                        <i class="material-icons circle red lighten-2">pets</i>
+                                        <% } %>
+                                            <span class="title"><b>
+                                                    <%= appointment.pet.name %>
+                                                </b> - <%= appointment.service.name %></span>
+                                            <p>
+                                                <%= appointment.formattedDate %><br>
+                                                    <% if(appointment.notes) { %>
+                                                        Note: <%= appointment.notes %>
+                                                            <% } %>
+                                            </p>
+                                            <span class="secondary-content">
+                                                <span class="new badge red lighten-2"
+                                                    data-badge-caption="">Cancelled</span>
+                                            </span>
+                        </a>
+                        <% }) %>
+                </div>
+                <% } else { %>
+                    <div class="card-panel center-align">
+                        <i class="material-icons medium grey-text">block</i>
+                        <p>No cancelled appointments found.</p>
+                    </div>
+                    <% } %>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tabs = document.querySelectorAll('.tabs');
+        var instances = M.Tabs.init(tabs);
+    });
+</script>
