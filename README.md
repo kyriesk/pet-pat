@@ -30,7 +30,7 @@ A comprehensive web application for managing pet grooming appointments, built wi
 1. Clone the repository:
 
 ```
-git clone <repository-url>
+git clone https://github.com/kyriesk/pet-pat.git
 cd pet-pat
 ```
 
@@ -75,6 +75,7 @@ npm run dev
 pet-pat/
 ├── config/              # Configuration files
 │   └── passport.js      # Passport.js authentication config
+│   └── paths.js         # Paths.js path config
 ├── controllers/         # Route controllers
 ├── middleware/          # Custom middleware
 │   └── auth.js          # Authentication middleware
@@ -103,9 +104,9 @@ pet-pat/
 ├── app.js               # Application entry point
 ├── package.json         # Project dependencies
 ├── seed.js              # Database seeding script
+├── LICENSE              # Open source license (MIT)
 └── .env                 # Environment variables
 ```
-
 
 
 ## Future Enhancements
@@ -118,4 +119,4 @@ pet-pat/
 
 ## License
 
-
+This project is licensed under the [MIT License](LICENSE).
