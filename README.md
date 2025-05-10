@@ -113,7 +113,7 @@ pet-pat/
 
 - Admin dashboard for service providers
 - Email notifications for booking confirmations and reminders
-- Payment processing integration
+
 - Pet health records and grooming history
 - Loyalty program for regular customers
 
