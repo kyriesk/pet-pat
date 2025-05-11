@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12 m3 center-align">
+                        <i class="material-icons large teal-text">event</i>
+                    </div>
+                    <div class="col s12 m9">
+                        <span class="card-title">
+                            Appointment Details
+                        </span>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h6><strong>Pet Information</strong></h6>
+                            <p><strong>Name:</strong> <%= appointment.pet.name %></p>
+                            <p><strong>Type:</strong> <%= appointment.pet.type.charAt(0).toUpperCase() + appointment.pet.type.slice(1) %></p>
+                            <% if(appointment.pet.breed) { %>
+                                <p><strong>Breed:</strong> <%= appointment.pet.breed %></p>
+                            <% } %>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h6><strong>Service Information</strong></h6>
+                            <p><strong>Service:</strong> <%= appointment.service.name %></p>
+                            <p><strong>Duration:</strong> <%= appointment.service.duration %> minutes</p>
+                            <p><strong>Price:</strong> $<%= appointment.service.price %></p>
+                        </div>
+
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h6><strong>Appointment Details</strong></h6>
+                            <p><strong>Date & Time:</strong> <%= appointment.formattedDate %></p>
+                            <p>
+                                <strong>Status:</strong>
+                                <% if (appointment.status === 'scheduled') { %>
+                                    <span class="new badge blue" data-badge-caption="Scheduled"></span>
+                                <% } else if (appointment.status === 'completed') { %>
+                                    <span class="new badge green" data-badge-caption="Completed"></span>
+                                <% } else { %>
+                                    <span class="new badge grey" data-badge-caption="Cancelled"></span>
+                                <% } %>
+                            </p>
+                            <% if (appointment.notes) { %>
+                                <div class="section">
+                                    <h6><strong>Notes:</strong></h6>
+                                    <p><%= appointment.notes %></p>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="col s12">
+                        <% if (appointment.status === 'scheduled' && new Date(appointment.date) > new Date()) { %>
+                            <a href="/appointments/<%= appointment._id %>/edit" class="btn waves-effect waves-light orange">
+                                <i class="material-icons left">edit</i>Edit
+                            </a>
+                            <a href="#cancel-modal" class="btn waves-effect waves-light red modal-trigger">
+                                <i class="material-icons left">cancel</i>Cancel
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-align" style="margin-top: 20px;">
+            <a href="/appointments" class="btn-flat waves-effect waves-teal">
+                <i class="material-icons left">arrow_back</i>Back to Appointments
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Modal -->
+<div id="cancel-modal" class="modal">
+    <div class="modal-content">
+        <h4>Confirm Cancellation</h4>
+        <p>Are you sure you want to cancel this appointment? This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Back</a>
+        <form action="/appointments/<%= appointment._id %>/cancel?_method=PUT" method="POST" style="display: inline;">
+            <button type="submit" class="btn waves-effect waves-light red">
+                Cancel Appointment
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    });
+</script>
+
+<%- include('../partials/footer') %> 

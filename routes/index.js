@@ -20,7 +20,7 @@ router.get("/", ensureGuest, (req, res) => {
 router.get("/dashboard", ensureAuthenticated, async (req, res) => {
   try {
     // Get user's pets
-    const pets = await Pet.find({ owner: req.user.id }).lean();
+    const pets = await Pet.find({ user: req.user._id }).lean();
 
     // Get user's upcoming appointments
     const appointments = await Appointment.find({

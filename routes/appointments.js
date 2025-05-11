@@ -11,7 +11,8 @@ const Service = require("../models/Service");
 router.get("/book", ensureAuthenticated, async (req, res) => {
   try {
     // Get user's pets
-    const pets = await Pet.find({ owner: req.user.id }).lean();
+    const pets = await Pet.find({ user: req.user._id }).lean();
+    const selectedPet = req.query.pet || null;
 
     // Get available services
     const services = await Service.find().lean();
@@ -20,6 +21,7 @@ router.get("/book", ensureAuthenticated, async (req, res) => {
       title: "Book Appointment",
       pets,
       services,
+      selectedPet,
     });
   } catch (err) {
     console.error(err);
@@ -31,12 +33,20 @@ router.get("/book", ensureAuthenticated, async (req, res) => {
 // @route   POST /appointments
 router.post("/", ensureAuthenticated, async (req, res) => {
   try {
-    const { pet, service, date, notes } = req.body;
-
+    const { pet, service, appointment_date, time, notes } = req.body;
     // Validate pet ownership
     const petDoc = await Pet.findById(pet);
-    if (!petDoc || petDoc.owner.toString() !== req.user.id) {
+    if (!petDoc || petDoc.user.toString() !== req.user.id) {
       req.session.error_msg = "Invalid pet selection";
+      return res.redirect("/appointments/book");
+    }
+
+    // Combine date and time
+    const date = new Date(`${appointment_date}T${time}`);
+    
+    // Validate if date is valid
+    if (isNaN(date.getTime())) {
+      req.session.error_msg = "Invalid date or time format";
       return res.redirect("/appointments/book");
     }
 
@@ -45,7 +55,7 @@ router.post("/", ensureAuthenticated, async (req, res) => {
       user: req.user.id,
       pet,
       service,
-      date: new Date(date),
+      date,
       notes,
       status: "scheduled",
     });
@@ -147,13 +157,12 @@ router.get("/:id/edit", ensureAuthenticated, async (req, res) => {
       }
 
       // Get user's pets and services for the form
-      const pets = await Pet.find({ owner: req.user.id }).lean();
+      const pets = await Pet.find({ user: req.user._id }).lean();
       const services = await Service.find().lean();
 
       // Format date for input fields
       const formattedDate = moment(appointment.date).format("YYYY-MM-DD");
       const formattedTime = moment(appointment.date).format("HH:mm");
-
       res.render("appointments/edit", {
         title: "Edit Appointment",
         appointment,
@@ -186,7 +195,7 @@ router.put("/:id", ensureAuthenticated, async (req, res) => {
       // Validate pet ownership
       if (req.body.pet) {
         const petDoc = await Pet.findById(req.body.pet);
-        if (!petDoc || petDoc.owner.toString() !== req.user.id) {
+        if (!petDoc || petDoc.user.toString() !== req.user._id) {
           req.session.error_msg = "Invalid pet selection";
           return res.redirect(`/appointments/${req.params.id}/edit`);
         }
