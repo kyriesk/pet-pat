@@ -179,7 +179,7 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
       return res.redirect("/pets");
     }
 
-    await pet.deleteOne()
+    await pet.remove();
     req.session.success_msg = "Pet removed successfully";
     res.redirect("/pets");
   } catch (err) {
