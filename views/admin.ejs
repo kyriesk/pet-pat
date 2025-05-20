@@ -1,0 +1,100 @@
+<div class="container">
+  <h3 class="center teal-text text-darken-2">Admin Dashboard</h3>
+
+  <!-- Service Management Section -->
+  <div class="section">
+    <h5 class="teal-text">Manage Services</h5>
+    <a href="/services/add" class="btn teal darken-2">Add New Service</a>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Service Name</th>
+          <th>Price</th>
+          <th>Duration</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% services.forEach(service=> { %>
+          <tr>
+            <td>
+              <%= service.name %>
+            </td>
+            <td>$<%= service.price %>
+            </td>
+            <td>
+              <%= service.duration %> mins
+            </td>
+            <td>
+              <a href="/admin/services/edit/<%= service._id %>" class="btn-small">Edit</a>
+              <a href="/admin/services/delete/<%= service._id %>" class="btn-small red">Delete</a>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Gallery Management Section -->
+  <div class="section">
+    <h5 class="teal-text">Gallery Management</h5>
+    <form action="/admin/gallery/upload" method="POST" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn teal">
+          <span>Upload Media</span>
+          <input type="file" name="media" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Upload images or videos">
+        </div>
+      </div>
+      <button type="submit" class="btn">Upload</button>
+    </form>
+
+    <div class="row">
+      <% gallery.forEach(item=> { %>
+        <div class="col s6 m3">
+          <% if (item.type==='image' ) { %>
+            <img src="<%= item.url %>" class="responsive-img">
+            <% } else { %>
+              <video src="<%= item.url %>" controls class="responsive-video"></video>
+              <% } %>
+                <form action="/admin/gallery/delete/<%= item._id %>" method="POST">
+                  <button type="submit" class="btn-small red">Delete</button>
+                </form>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+
+  <!-- Contact Section Only -->
+  <div class="section">
+    <h5 class="teal-text">Update Contact Info</h5>
+    <form action="/admin/settings" method="POST">
+      <div class="row">
+        <div class="col s12">
+          <div class="input-field">
+            <input type="text" name="phone" value="<%= settings.phone %>" required>
+            <label class="active">Contact Phone</label>
+          </div>
+          <div class="input-field">
+            <input type="email" name="email" value="<%= settings.email %>" required>
+            <label class="active">Contact Email</label>
+          </div>
+          <div class="input-field">
+            <input type="text" name="hours" value="<%= settings.hours %>" required>
+            <label class="active">Business Hours</label>
+          </div>
+          <div class="input-field">
+            <input type="text" name="address" value="<%= settings.address %>" required>
+            <label class="active">Business Address</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn teal darken-2">
+        <i class="material-icons left">save</i>Update Settings
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <h4 class="teal-text text-darken-2 center">Edit Service</h4>
+
+  <form action="/admin/services/edit/<%= service._id %>" method="POST">
+    <div class="input-field">
+      <input id="name" name="name" type="text" value="<%= service.name %>" required>
+      <label for="name" class="active">Service Name</label>
+    </div>
+
+    <div class="input-field">
+      <input id="price" name="price" type="number" step="0.01" value="<%= service.price %>" required>
+      <label for="price" class="active">Price ($)</label>
+    </div>
+
+    <div class="input-field">
+      <input id="duration" name="duration" type="number" value="<%= service.duration %>" required>
+      <label for="duration" class="active">Duration (minutes)</label>
+    </div>
+
+    <div class="input-field">
+      <textarea id="description" name="description" class="materialize-textarea"><%= service.description %></textarea>
+      <label for="description" class="active">Description</label>
+    </div>
+
+    <button type="submit" class="btn teal darken-2">Update Service</button>
+    <a href="/admin" class="btn grey">Cancel</a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>
+
