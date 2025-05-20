@@ -20,7 +20,8 @@ const PATHS = {
   APPOINTMENTS: {
     BOOK: '/appointments/book',
     INDEX: '/appointments',
-    SHOW: (id) => `/appointments/${id}`
+    SHOW: (id) => `/appointments/${id}`,
+    CANCEL: (id) => `/appointments/${id}/cancel`
   }
 };
 
