@@ -25,7 +25,7 @@ module.exports = {
     res.redirect(redirectPaths.dashboard);
   },
 
-  // Check if user is not logged in (for guest pages)
+  // Check if user is not logged in (for guest pages)book.ejs
   ensureGuest: function (req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
