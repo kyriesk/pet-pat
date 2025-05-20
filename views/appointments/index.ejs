@@ -134,6 +134,12 @@
                                                 <span class="new badge red lighten-2"
                                                     data-badge-caption="">Cancelled</span>
                                             </span>
+                            <form action="/appointments/<%= appointment._id %>/cancel" method="POST" style="display: inline;">
+                                <input type="hidden" name="_method" value="PUT">
+                                <button type="submit" class="btn-small red waves-effect waves-light" onclick="return confirm('Are you sure you want to cancel this appointment?')">
+                                    <i class="material-icons">cancel</i>
+                                </button>
+                            </form>
                         </a>
                         <% }) %>
                 </div>

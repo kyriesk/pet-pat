@@ -1,119 +1,120 @@
-<div class="row">
-  <div class="col s12">
-    <h3>Book an Appointment</h3>
-    <p>Select a pet, service, and preferred date and time for grooming.</p>
-  </div>
-</div>
+<div class="container">
+  <h3 class="center teal-text text-darken-2">Book an Appointment</h3>
 
-<div class="row">
-  <div class="col s12 m8 offset-m2">
-    <div class="card-panel">
-      <h4 class="center-align teal-text text-darken-2">Book an Appointment</h4>
-
-      <% if(pets.length===0) { %>
-      <div class="center-align" style="margin: 30px 0;">
-        <i class="material-icons large red-text text-lighten-2">pets</i>
-        <h5>You need to add a pet first!</h5>
-        <p>Before booking an appointment, you need to register your pet.</p>
-        <a href="/pets/add" class="btn-large waves-effect waves-light teal" style="margin-top: 20px;">
-          <i class="material-icons left">add</i>Add a Pet
-        </a>
-      </div>
-      <% } else { %>
-      <form action="/appointments" method="POST">
-        <div class="row">
-          <div class="input-field col s12">
-            <select id="pet" name="pet" required>
-              <option value="" disabled selected>Choose your pet</option>
-              <% pets.forEach(function(pet) { %>
-              <option value="<%= pet._id %>" <% if(typeof selectedPet !== 'undefined' && selectedPet === pet._id.toString()) { %>selected<% } %>>
-                <%= pet.name %> (<%= pet.type.charAt(0).toUpperCase() + pet.type.slice(1) %>
-                <% if(pet.breed) { %>, <%= pet.breed %><% } %>)
-              </option>
-              <% }) %>
-            </select>
-            <label>Select Pet</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Choose service type</option>
-              <% services.forEach(function(service) { %>
-              <option value="<%= service._id %>" <%= typeof selectedService !== 'undefined' && selectedService === service._id.toString() ? 'selected' : '' %>>
-                <%= service.name %> - $<%= service.price.toFixed(2) %>
-              </option>
-              <% }) %>
-            </select>
-            <label>Select Service</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input id="appointment-date" name="appointment_date" type="date" class="validate" required min="<%= new Date().toISOString().split('T')[0] %>">
-            <label for="appointment-date">Appointment Date</label>
-          </div>
-
-          <div class="input-field col s12 m6">
-            <input id="time" name="time" type="time" class="validate" required>
-            <label for="time">Appointment Time</label>
-          </div>
-          <input type="hidden" name="combined_datetime" id="combined-date">
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="notes" name="notes" class="materialize-textarea"></textarea>
-            <label for="notes">Special Requests or Notes</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s12">
-            <button type="submit" class="btn waves-effect waves-light teal darken-2 btn-large" style="width: 100%;">
-              Book Appointment
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <% } %>
-
+  <div class="row">
+    <form action="/appointments" method="POST" class="col s12">
+      <!-- Pet Selection -->
       <div class="row">
-        <div class="col s12 center">
-          <a href="/appointments" class="teal-text text-darken-2">
-            <i class="material-icons left">arrow_back</i>Back to My Appointments
-          </a>
+        <div class="input-field col s12">
+          <select name="pet" required>
+            <option value="" disabled selected>Choose your pet</option>
+            <% pets.forEach(pet => { %>
+              <option value="<%= pet._id %>"><%= pet.name %> (<%= pet.type %>)</option>
+            <% }) %>
+          </select>
+          <label>Select Pet</label>
         </div>
       </div>
+
+      <!-- Service Selection -->
+      <div class="row">
+        <div class="input-field col s12">
+          <select id="service" name="service" required>
+            <option value="" disabled <%= !selectedService ? 'selected' : '' %>>Choose service type</option>
+            <% Object.entries(servicesByCategory).forEach(([category, services]) => { %>
+              <optgroup label="<%= category.charAt(0).toUpperCase() + category.slice(1) %>">
+                <% services.forEach(service => { %>
+                  <option value="<%= service._id %>" <%= selectedService && selectedService === service._id.toString() ? 'selected' : '' %>>
+                    <%= service.name %> - $<%= service.price.toFixed(2) %> (<%= service.duration %> mins)
+                  </option>
+                <% }) %>
+              </optgroup>
+            <% }) %>
+          </select>
+          <label>Select Service</label>
+        </div>
+      </div>
+
+      <!-- Date Selection -->
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="date" name="appointment_date" id="date" required min="<%= moment().format('YYYY-MM-DD') %>">
+          <label for="date">Date</label>
+        </div>
+        <div class="input-field col s6">
+          <input type="time" name="time" id="time" required>
+          <label for="time">Time</label>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea name="notes" id="notes" class="materialize-textarea"></textarea>
+          <label for="notes">Additional Notes (Optional)</label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="row center">
+        <button type="submit" class="btn-large waves-effect waves-light teal darken-2">
+          Book Appointment
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Service Information -->
+  <div class="row">
+    <div class="col s12">
+      <h4 class="teal-text text-darken-2">Available Services</h4>
+      <% Object.entries(servicesByCategory).forEach(([category, services]) => { %>
+        <div class="section">
+          <h5 class="teal-text"><%= category.charAt(0).toUpperCase() + category.slice(1) %></h5>
+          <div class="row">
+            <% services.forEach(service => { %>
+              <div class="col s12 m6 l4">
+                <div class="card hoverable">
+                  <% if (service.image) { %>
+                    <div class="card-image">
+                      <img src="<%= service.image %>" alt="<%= service.name %>">
+                    </div>
+                  <% } %>
+                  <div class="card-content">
+                    <span class="card-title teal-text text-darken-2"><%= service.name %></span>
+                    <p><strong>$<%= service.price.toFixed(2) %></strong> &middot; <%= service.duration %> mins</p>
+                    <p><%= service.description %></p>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      <% }) %>
     </div>
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var selects = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(selects);
+    // Initialize select elements
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
 
-    var textareas = document.querySelectorAll('.materialize-textarea');
-    M.textareaAutoResize(textareas);
-
-    // Set up form submission to combine date and time
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const dateInput = document.getElementById('appointment-date');
-      const timeInput = document.getElementById('time');
-
-      if (dateInput.value && timeInput.value) {
-        const combinedDate = dateInput.value + 'T' + timeInput.value;
-        document.getElementById('combined-date').value = combinedDate;
+    // Set minimum time to current time for today's date
+    const dateInput = document.getElementById('date');
+    const timeInput = document.getElementById('time');
+    
+    dateInput.addEventListener('change', function() {
+      const selectedDate = new Date(this.value);
+      const today = new Date();
+      
+      if (selectedDate.toDateString() === today.toDateString()) {
+        const currentTime = today.toTimeString().slice(0, 5);
+        timeInput.min = currentTime;
+      } else {
+        timeInput.min = '00:00';
       }
-
-      this.submit();
     });
   });
 </script>
