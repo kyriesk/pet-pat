@@ -4,15 +4,50 @@ const { ensureAuthenticated, ensureGuest } = require("../middleware/auth");
 const Pet = require("../models/Pet");
 const Service = require("../models/Service");
 const Appointment = require("../models/Appointment");
+const Gallery = require("../models/Gallery");
+const Setting = require("../models/Setting");
 const moment = require("moment");
 
 // @desc    Landing page
 // @route   GET /
-router.get("/", ensureGuest, (req, res) => {
-  res.render("index", {
-    layout: "layouts/landing",
-    title: "Welcome",
-  });
+router.get("/", async(req, res) => {
+  try {
+    // Get all active media items, sorted by order and creation date
+    const gallery = await Gallery.find({ 
+      isActive: true 
+    })
+    .sort({ order: 1, createdAt: -1 })
+    .lean();
+
+    // Separate photos and videos
+    const photos = gallery.filter(item => item.type === 'image');
+    const videos = gallery.filter(item => item.type === 'video');
+
+    let settings = await Setting.findOne().lean();
+
+    if (!settings) {
+      settings = { phone: "", email: "", hours: "" };
+    }
+
+    // Get active services, sorted by order
+    const services = await Service.find({ 
+      isActive: true 
+    })
+    .sort({ order: 1, createdAt: -1 })
+    .lean();
+
+    res.render("index", {
+      layout: "layouts/landing",
+      title: "Welcome",
+      photos,
+      videos,
+      settings,
+      services
+    });
+  } catch (err) {
+    console.error(err);
+    res.render("error/500");
+  }
 });
 
 // @desc    Dashboard
@@ -20,7 +55,7 @@ router.get("/", ensureGuest, (req, res) => {
 router.get("/dashboard", ensureAuthenticated, async (req, res) => {
   try {
     // Get user's pets
-    const pets = await Pet.find({ user: req.user._id }).lean();
+    const pets = await Pet.find({ user: req.user.id }).lean();
 
     // Get user's upcoming appointments
     const appointments = await Appointment.find({

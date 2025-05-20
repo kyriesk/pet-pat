@@ -105,8 +105,12 @@ router.post("/login", (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log("req.logIn", err, user, info);
-      return res.redirect("/dashboard");
+      
+      if (user.isAdmin) {
+        return res.redirect("/admin");
+      } else {
+        return res.redirect("/dashboard");
+      }
     });
   })(req, res, next);
 });
