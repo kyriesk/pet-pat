@@ -28,6 +28,17 @@ const ServiceSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  order: {
+    type: Number,
+    default: 0,
+  },
+  category: {
+    type: String,
+    default: 'general',
+  },
+  image: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
