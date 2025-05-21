@@ -79,21 +79,28 @@ pet-pat/
 ├── controllers/         # Route controllers
 ├── middleware/          # Custom middleware
 │   └── auth.js          # Authentication middleware
+│   └── setting.js       # Setting middleware
+│   └── upload.js        # Upload middleware
 ├── models/              # MongoDB models
 │   ├── Appointment.js   # Appointment schema
 │   ├── Pet.js           # Pet schema
 │   ├── Service.js       # Service schema
 │   └── User.js          # User schema
+│   └── Feedback.js      # Feedback schema
+│   └── Gallery.js       # Gallery schema
+│   └── Setting.js       # Setting schema
 ├── public/              # Static assets
 │   ├── css/             # CSS files
 │   ├── js/              # Client-side JavaScript
 │   └── img/             # Images
+│   └── uploads/         # The file uploaded by Multer
 ├── routes/              # Express routes
 │   ├── appointments.js  # Appointment routes
 │   ├── index.js         # Main routes
 │   ├── pets.js          # Pet management routes
 │   ├── services.js      # Service catalog routes
 │   └── users.js         # Authentication routes
+│   └── admin.js         # Admin panel routes
 ├── views/               # EJS templates
 │   ├── appointments/    # Appointment views
 │   ├── layouts/         # Page layouts
@@ -101,6 +108,7 @@ pet-pat/
 │   ├── pets/            # Pet management views
 │   ├── services/        # Service catalog views
 │   └── users/           # Authentication views
+│   └── admin/           # admin panel views
 ├── app.js               # Application entry point
 ├── package.json         # Project dependencies
 ├── seed.js              # Database seeding script
