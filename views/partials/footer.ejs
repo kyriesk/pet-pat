@@ -1,28 +1,61 @@
 <footer class="page-footer teal darken-2">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
+            <div class="col s12 m4">
                 <h5 class="white-text">Pet-Pat Grooming Services</h5>
-                <p class="grey-text text-lighten-4">Your pet deserves the best care. Our professional groomers are here
-                    to pamper your furry friends.</p>
+                <p class="grey-text text-lighten-4">Professional pet grooming services for your beloved pets.</p>
             </div>
-            <div class="col l4 offset-l2 s12">
+            <div class="col s12 m4">
                 <h5 class="white-text">Contact Us</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons tiny">phone</i> (123)
-                            456-7890</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons tiny">email</i>
-                            info@petpat.com</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons tiny">location_on</i> 123
-                            Main St, Anytown</a></li>
-                </ul>
+                <p class="grey-text text-lighten-4">
+                    <i class="material-icons tiny">phone</i> <%= settings.phone %>
+                </p>
+                <p class="grey-text text-lighten-4">
+                    <i class="material-icons tiny">email</i> <%= settings.email %>
+                </p>
+                <p class="grey-text text-lighten-4">
+                    <i class="material-icons tiny">access_time</i> <%= settings.hours %>
+                </p>
+                <p class="grey-text text-lighten-4">
+                    <i class="material-icons tiny">location_on</i> <%= settings.address %>
+                </p>
+            </div>
+            <div class="col s12 m4">
+                <h5 class="white-text">Follow Us</h5>
+                <div class="social-links">
+                    <a href="<%= settings.facebook %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">facebook</i></a>
+                    <a href="<%= settings.instagram %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">photo_camera</i></a>
+                    <a href="<%= settings.wechat %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">pets</i></a>
+                </div>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
-            © <%= new Date().getFullYear() %> Pet-Pat Grooming Services
-                <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
+            <div class="row">
+                <div class="col s12 m6">
+                    © <%= new Date().getFullYear() %> Pet-Pat Grooming Services
+                </div>
+                <div class="col s12 m6 right-align">
+                    <a href="/privacy" class="grey-text text-lighten-4">Privacy Policy</a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
+
+<style>
+    .social-links {
+        margin-top: 1rem;
+    }
+    .social-links a {
+        margin-right: 1rem;
+        transition: color 0.3s ease;
+    }
+    .social-links a:hover {
+        color: #fff !important;
+    }
+    .footer-copyright {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+</style>

@@ -9,6 +9,9 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="/services">Services</a></li>
             <% if(locals.user) { %>
+                <% if(user.isAdmin) { %>
+                    <li><a href="/admin"><i class="material-icons left">admin_panel_settings</i>Admin Panel</a></li>
+                <% } %>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/pets">My Pets</a></li>
                 <li><a href="/appointments">My Appointments</a></li>
@@ -36,6 +39,9 @@
 <ul class="sidenav" id="mobile-nav">
     <li><a href="/services">Services</a></li>
     <% if(locals.user) { %>
+        <% if(user.isAdmin) { %>
+            <li><a href="/admin"><i class="material-icons left">admin_panel_settings</i>Admin Panel</a></li>
+        <% } %>
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="/pets">My Pets</a></li>
         <li><a href="/appointments">My Appointments</a></li>
@@ -46,3 +52,18 @@
             <li><a href="/users/register">Register</a></li>
             <% } %>
 </ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize dropdown
+        var dropdowns = document.querySelectorAll('.dropdown-trigger');
+        M.Dropdown.init(dropdowns, {
+            constrainWidth: false,
+            coverTrigger: false
+        });
+
+        // Initialize sidenav
+        var sidenavs = document.querySelectorAll('.sidenav');
+        M.Sidenav.init(sidenavs);
+    });
+</script>
