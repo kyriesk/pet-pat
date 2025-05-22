@@ -8,10 +8,11 @@ const Service = require("./models/Service");
 dotenv.config({ path: "./.env" });
 
 // Connect to DB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+mongoose.connect(MONGO_URI);
 
 // Sample grooming services
 const services = [
