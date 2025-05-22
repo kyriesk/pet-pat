@@ -46,7 +46,7 @@ router.get("/book", ensureAuthenticated, async (req, res) => {
 // @route   GET /appointments
 router.get("/", ensureAuthenticated, async (req, res) => {
   try {
-    console.log('Fetching appointments for user:', req.user.id);
+    // console.log('Fetching appointments for user:', req.user.id);
     
     // If user is admin, show all appointments
     const query = req.user.isAdmin ? {} : { user: req.user.id };
@@ -58,7 +58,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
       .sort({ date: "desc" })
       .lean();
 
-    console.log('Found appointments:', appointments.length);
+    // console.log('Found appointments:', appointments.length);
 
     // Format dates for display
     appointments.forEach((appointment) => {
@@ -91,7 +91,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 router.post("/", ensureAuthenticated, async (req, res) => {
   try {
     const { pet, service, appointment_date, time, notes } = req.body;
-    console.log('Appointment booking attempt:', { pet, service, appointment_date, time, notes });
+    // console.log('Appointment booking attempt:', { pet, service, appointment_date, time, notes });
     
     // Validate pet ownership
     const petDoc = await Pet.findById(pet);
@@ -103,7 +103,7 @@ router.post("/", ensureAuthenticated, async (req, res) => {
 
     // Combine date and time
     const date = new Date(`${appointment_date}T${time}`);
-    console.log('Combined date:', date);
+    // console.log('Combined date:', date);
     
     // Validate if date is valid
     if (isNaN(date.getTime())) {
@@ -121,7 +121,7 @@ router.post("/", ensureAuthenticated, async (req, res) => {
       notes,
       status: "scheduled",
     });
-    console.log('Appointment created successfully:', appointment._id);
+    // console.log('Appointment created successfully:', appointment._id);
 
     req.session.success_msg = "Appointment booked successfully";
     res.redirect("/appointments");
