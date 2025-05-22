@@ -40,9 +40,15 @@
                                     <% } else { %>
                                         <i class="material-icons circle teal">pets</i>
                                         <% } %>
-                                            <span class="title"><b>
-                                                    <%= appointment.pet.name %>
-                                                </b> - <%= appointment.service.name %></span>
+                                            <% if (appointment.service) { %>
+                                                <span class="title"><b>
+                                                        <%= appointment.pet.name %>
+                                                    </b> - <%= appointment.service.name %></span>
+                                            <% } else { %>
+                                                <span class="title"><b>
+                                                        <%= appointment.pet.name %>
+                                                    </b> - Service not found</span>
+                                            <% } %>
                                             <p>
                                                 <%= appointment.formattedDate %><br>
                                                     <% if(appointment.notes) { %>
@@ -80,9 +86,15 @@
                                         <% } else { %>
                                             <i class="material-icons circle grey">pets</i>
                                             <% } %>
-                                                <span class="title"><b>
-                                                        <%= appointment.pet.name %>
-                                                    </b> - <%= appointment.service.name %></span>
+                                                <% if (appointment.service) { %>
+                                                    <span class="title"><b>
+                                                            <%= appointment.pet.name %>
+                                                        </b> - <%= appointment.service.name %></span>
+                                                <% } else { %>
+                                                    <span class="title"><b>
+                                                            <%= appointment.pet.name %>
+                                                        </b> - Service not found</span>
+                                                <% } %>
                                                 <p>
                                                     <%= appointment.formattedDate %><br>
                                                         <% if(appointment.notes) { %>
@@ -121,9 +133,15 @@
                                     <% } else { %>
                                         <i class="material-icons circle red lighten-2">pets</i>
                                         <% } %>
-                                            <span class="title"><b>
-                                                    <%= appointment.pet.name %>
-                                                </b> - <%= appointment.service.name %></span>
+                                            <% if (appointment.service) { %>
+                                                <span class="title"><b>
+                                                        <%= appointment.pet.name %>
+                                                    </b> - <%= appointment.service.name %></span>
+                                            <% } else { %>
+                                                <span class="title"><b>
+                                                        <%= appointment.pet.name %>
+                                                    </b> - Service not found</span>
+                                            <% } %>
                                             <p>
                                                 <%= appointment.formattedDate %><br>
                                                     <% if(appointment.notes) { %>
