@@ -182,7 +182,6 @@ input:focus + label {
   .service-card .card-content {
     flex-grow: 1;
   }
-  
 
   /* Photo gallery card image standardization */
   .gallery-card .card-image {
