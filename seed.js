@@ -17,7 +17,7 @@ const services = [
   {
     name: "Basic Bath & Brush",
     description:
-      "A gentle bath with premium pet shampoo, followed by a thorough blow-dry and brush out. Perfect for regular maintenance of your pet's coat.",
+      "A gentle bath with premium pet shampoo. Perfect for regular maintenance of your pet's coat.",
     price: 35.0,
     duration: 45,
     petType: ["dog", "cat"],
@@ -71,14 +71,62 @@ const services = [
 ];
 
 const galleryMedia = [
-  { url: "/uploads/1747877314068.jpg", type: "image", category: "general", order: 0, isActive: true },
-  { url: "/uploads/1747877314078.jpg", type: "image", category: "general", order: 1, isActive: true },
-  { url: "/uploads/1747877314079.jpg", type: "image", category: "general", order: 2, isActive: true },
-  { url: "/uploads/1747877314080.jpg", type: "image", category: "general", order: 3, isActive: true },
-  { url: "/uploads/1747877314099.jpg", type: "image", category: "general", order: 5, isActive: true },
-  { url: "/uploads/1747877361045.jpg", type: "image", category: "general", order: 6, isActive: true },
-  { url: "/uploads/1747877030854.mp4", type: "video", category: "general", order: 7, isActive: true },
-  { url: "/uploads/1747878756407.mp4", type: "video", category: "general", order: 8, isActive: true },
+  {
+    url: "/uploads/1747877314068.jpg",
+    type: "image",
+    category: "general",
+    order: 0,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877314078.jpg",
+    type: "image",
+    category: "general",
+    order: 1,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877314079.jpg",
+    type: "image",
+    category: "general",
+    order: 2,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877314080.jpg",
+    type: "image",
+    category: "general",
+    order: 3,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877314099.jpg",
+    type: "image",
+    category: "general",
+    order: 5,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877361045.jpg",
+    type: "image",
+    category: "general",
+    order: 6,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747877030854.mp4",
+    type: "video",
+    category: "general",
+    order: 7,
+    isActive: true,
+  },
+  {
+    url: "/uploads/1747878756407.mp4",
+    type: "video",
+    category: "general",
+    order: 8,
+    isActive: true,
+  },
 ];
 
 // Sample settings data
@@ -89,7 +137,7 @@ const settings = {
   address: "123 Pet Street, Pet City, PC 12345",
   facebook: "https://facebook.com/petpat",
   instagram: "https://instagram.com/petpat",
-  wechat: "https://wechat.com/petpat"
+  wechat: "https://wechat.com/petpat",
 };
 
 // Import the sample data into the database
