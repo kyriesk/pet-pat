@@ -8,17 +8,22 @@
             <div class="col s12 m4">
                 <h5 class="white-text">Contact Us</h5>
                 <p class="grey-text text-lighten-4">
-                    <i class="material-icons tiny">phone</i> <%= settings.phone %>
+                    <i class="material-icons tiny">phone</i>
+                    <%= settings.phone %>
                 </p>
                 <p class="g-text text-lighten-4">
-                    <i class="material-icons tiny">email</i> 
-                    <a href="mailto:<%= settings.email %>"><%= settings.email %></a>
+                    <i class="material-icons tiny">email</i>
+                    <a href="mailto:<%= settings.email %>">
+                        <%= settings.email %>
+                    </a>
                 </p>
                 <p class="grey-text text-lighten-4">
-                    <i class="material-icons tiny">access_time</i> <%= settings.hours %>
+                    <i class="material-icons tiny">access_time</i>
+                    <%= settings.hours %>
                 </p>
                 <p class="grey-text text-lighten-4">
-                    <i class="material-icons tiny">location_on</i> <%= settings.address %>
+                    <i class="material-icons tiny">location_on</i>
+                    <%= settings.address %>
                 </p>
                 <p class="grey-text text-lighten-4">
                     <i class="material-icons tiny">feedback</i>
@@ -28,9 +33,12 @@
             <div class="col s12 m4">
                 <h5 class="white-text">Follow Us</h5>
                 <div class="social-links">
-                    <a href="<%= settings.facebook %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">facebook</i></a>
-                    <a href="<%= settings.instagram %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">photo_camera</i></a>
-                    <a href="<%= settings.wechat %>" class="grey-text text-lighten-4" target="_blank"><i class="material-icons">pets</i></a>
+                    <a href="<%= settings.facebook %>" class="grey-text text-lighten-4" target="_blank"><i
+                            class="material-icons">facebook</i></a>
+                    <a href="<%= settings.instagram %>" class="grey-text text-lighten-4" target="_blank"><i
+                            class="material-icons">photo_camera</i></a>
+                    <a href="<%= settings.wechat %>" class="grey-text text-lighten-4" target="_blank"><i
+                            class="material-icons">pets</i></a>
                 </div>
             </div>
         </div>
@@ -53,17 +61,22 @@
     .social-links {
         margin-top: 1rem;
     }
+
     .social-links a {
         margin-right: 1rem;
         transition: color 0.3s ease;
     }
+
     .social-links a:hover {
         color: #fff !important;
     }
+
     .footer-copyright {
         background-color: rgba(0, 0, 0, 0.2) !important;
     }
-    .g-text a, .grey-text a {
+
+    .g-text a,
+    .grey-text a {
         color: inherit;
         text-decoration: underline;
     }
