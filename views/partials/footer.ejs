@@ -10,7 +10,7 @@
                 <p class="grey-text text-lighten-4">
                     <i class="material-icons tiny">phone</i> <%= settings.phone %>
                 </p>
-                <p class="grey-text text-lighten-4">
+                <p class="g-text text-lighten-4">
                     <i class="material-icons tiny">email</i> 
                     <a href="mailto:<%= settings.email %>"><%= settings.email %></a>
                 </p>
@@ -19,6 +19,10 @@
                 </p>
                 <p class="grey-text text-lighten-4">
                     <i class="material-icons tiny">location_on</i> <%= settings.address %>
+                </p>
+                <p class="grey-text text-lighten-4">
+                    <i class="material-icons tiny">feedback</i>
+                    <a href="/feedback" class="grey-text text-lighten-4">Feedback</a>
                 </p>
             </div>
             <div class="col s12 m4">
@@ -58,5 +62,9 @@
     }
     .footer-copyright {
         background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+    .g-text a, .grey-text a {
+        color: inherit;
+        text-decoration: underline;
     }
 </style>

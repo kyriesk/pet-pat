@@ -7,6 +7,7 @@ const Appointment = require("../models/Appointment");
 const Gallery = require("../models/Gallery");
 const Setting = require("../models/Setting");
 const moment = require("moment");
+const Feedback = require("../models/Feedback");
 
 // @desc    Landing page
 // @route   GET /
@@ -92,6 +93,53 @@ router.get("/dashboard", ensureAuthenticated, async (req, res) => {
     console.error(err);
     res.render("error/500");
   }
+});
+
+// @desc    Feedback form
+// @route   GET /feedback
+router.get("/feedback", async (req, res) => {
+    try {
+        let settings = await Setting.findOne().lean();
+
+        if (!settings) {
+            settings = { phone: "", email: "", hours: "" };
+        }
+
+        res.render("feedback", {
+            title: "Leave a Feedback",
+            settings
+        });
+    } catch (err) {
+        console.error(err);
+        res.render("error/500");
+    }
+});
+
+// @desc    Process feedback form
+// @route   POST /feedback
+router.post("/feedback", async (req, res) => {
+    try {
+        const { name, email, phone, message } = req.body;
+        const newFeedback = new Feedback({
+            name,
+            email,
+            phone,
+            message
+        });
+        await newFeedback.save();
+        res.redirect("/thankyou");
+    } catch (err) {
+        console.error(err);
+        res.render("error/500");
+    }
+});
+
+// @desc    Thank you page
+// @route   GET /thankyou
+router.get("/thankyou", (req, res) => {
+    res.render("thankyou", {
+        title: "Thank You"
+    });
 });
 
 module.exports = router;
