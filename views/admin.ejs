@@ -27,7 +27,9 @@
             </td>
             <td>
               <a href="/admin/services/edit/<%= service._id %>" class="btn-small">Edit</a>
-              <a href="/admin/services/delete/<%= service._id %>" class="btn-small red">Delete</a>
+              <form action="/admin/services/delete/<%= service._id %>" method="POST" style="display: inline;">
+                <button type="submit" class="btn-small red">Delete</button>
+              </form>
             </td>
           </tr>
           <% }) %>
