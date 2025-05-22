@@ -126,3 +126,28 @@ input:focus + label {
 .status-cancelled {
   background-color: #9E9E9E;
 }
+
+/* Equal height service cards (for Our Services section) */
+.card.equal-height {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ensure content fills available space */
+.card-content {
+  flex-grow: 1;
+}
+
+/* Ensure content fills available space */
+.card-action.center-align {
+  text-align: center;
+}
+
+/* Enhance card title readability */
+.card-title {
+  background-color: rgb(250, 248, 248);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
