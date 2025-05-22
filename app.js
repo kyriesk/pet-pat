@@ -1,5 +1,9 @@
-const dotenv = require("dotenv");  
-dotenv.config({ path: "./.env" }); 
+// Set a default value for NODE_ENV if it's not set
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Load environment variables from .env file
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 
 const express = require("express");
 const connectDB = require("./config/db");
