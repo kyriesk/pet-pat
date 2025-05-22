@@ -107,11 +107,12 @@
   // Fixed event listener - removed the space before DOMContentLoaded
   document.addEventListener(' DOMContentLoaded', function () {
     equalizeCards(); // Add resize listener
-    window.addEventListener('resize', equalizeCards); function equalizeCards() { // Reset heights
-                        first const cards = document.querySelectorAll('.service-card'); cards.forEach(card => {
-      const content = card.querySelector('.card-content');
-      content.style.height = 'auto';
-    });
+    window.addEventListener('resize', equalizeCards); function equalizeCards() {
+      const
+      cards = document.querySelectorAll('.service-card'); cards.forEach(card => {
+        const content = card.querySelector('.card-content');
+        content.style.height = 'auto';
+      });
 
       // Group cards by rows (2 per row on medium devices)
       const rows = {};
