@@ -265,8 +265,57 @@
 </div>
 
 <script>
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     var elems = document.querySelectorAll('.parallax');
+    //     var instances = M.Parallax.init(elems);
+    // });
     document.addEventListener('DOMContentLoaded', function () {
+        // Initialize parallax
         var elems = document.querySelectorAll('.parallax');
         var instances = M.Parallax.init(elems);
+
+        // Fix service card heights
+        equalizeServiceCardHeights();
+
+        // Also equalize on window resize
+        window.addEventListener('resize', equalizeServiceCardHeights);
+
+        function equalizeServiceCardHeights() {
+            // Group cards by rows (3 per row on medium devices)
+            const cards = document.querySelectorAll('.service-card');
+            const rows = {};
+
+            cards.forEach((card, index) => {
+                const rowIndex = Math.floor(index / 3);
+                if (!rows[rowIndex]) rows[rowIndex] = [];
+                rows[rowIndex].push(card);
+            });
+
+            // Reset heights first
+            cards.forEach(card => {
+                const content = card.querySelector('.card-content');
+                if (content) content.style.height = 'auto';
+            });
+
+            // For each row, find max height and apply to all cards in that row
+            Object.values(rows).forEach(rowCards => {
+                let maxContentHeight = 0;
+
+                // Find tallest content in this row
+                rowCards.forEach(card => {
+                    const content = card.querySelector('.card-content');
+                    if (content) {
+                        const height = content.scrollHeight;
+                        maxContentHeight = Math.max(maxContentHeight, height);
+                    }
+                });
+
+                // Apply height to all cards in this row
+                rowCards.forEach(card => {
+                    const content = card.querySelector('.card-content');
+                    if (content) content.style.height = maxContentHeight + 'px';
+                });
+            });
+        }
     });
 </script>

@@ -162,27 +162,30 @@ input:focus + label {
     }
 
 /* Service card image standardization */
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
   .service-card .card-image {
-    height: 200px;  /* Set fixed height */
-    overflow: hidden;  /* Hide overflow */
+    height: 200px;
+    overflow: hidden;
   }
   
   .service-card .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* This maintains aspect ratio while covering the area */
-    object-position: center;  /* Centers the image */
-  }
-  
-  /* Make cards equal height */
-  .service-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    object-fit: cover;
   }
   
   .service-card .card-content {
     flex-grow: 1;
+  }
+  
+  .col.s12.m4 {
+    display: flex;
+    margin-bottom: 20px;
   }
 
   /* Photo gallery card image standardization */
