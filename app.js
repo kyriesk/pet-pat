@@ -84,6 +84,7 @@ app.use("/users", require("./routes/users"));
 app.use("/pets", require("./routes/pets"));
 app.use("/services", require("./routes/services"));
 app.use("/appointments", require("./routes/appointments"));
+app.use("/admin", require("./routes/admin"));
 
 // Error handling - 404
 app.use((req, res, next) => {
