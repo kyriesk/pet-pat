@@ -3,16 +3,13 @@ const dotenv = require("dotenv");
 
 // Load models
 const Service = require("./models/Service");
+const Setting = require("./models/Setting");
 
 // Load env vars
 dotenv.config({ path: "./.env" });
 
 // Connect to DB
-// mongoose.connect(process.env.MONGODB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-mongoose.connect(MONGO_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 // Sample grooming services
 const services = [
@@ -72,14 +69,27 @@ const services = [
   },
 ];
 
+// Sample settings data
+const settings = {
+  phone: "123-456-7890",
+  email: "contact@petpat.com",
+  hours: "Mon-Fri 9am-6pm",
+  address: "123 Pet Street, Pet City, PC 12345",
+  facebook: "https://facebook.com/petpat",
+  instagram: "https://instagram.com/petpat",
+  wechat: "https://wechat.com/petpat"
+};
+
 // Import the sample data into the database
 const importData = async () => {
   try {
     // Clear the existing data
     await Service.deleteMany();
+    await Setting.deleteMany();
 
     // Insert new data
     await Service.create(services);
+    await Setting.create(settings);
 
     console.log("Data Imported!");
     process.exit();

@@ -16,6 +16,8 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const flash = require("connect-flash");
 
+// connect settingsMiddleware
+const settingsMiddleware = require("./middleware/settings");
 
 // Passport config
 require("./config/passport")(passport);
@@ -63,6 +65,9 @@ app.use(passport.session());
 
 // Connect flash
 app.use(flash());
+
+// settingsMiddleware
+app.use(settingsMiddleware);
 
 // Global variables
 app.use((req, res, next) => {
