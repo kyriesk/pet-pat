@@ -160,3 +160,56 @@ input:focus + label {
     .testimonial-content {
         width: 100%;
     }
+
+/* Service card image standardization */
+  .service-card .card-image {
+    height: 200px;  /* Set fixed height */
+    overflow: hidden;  /* Hide overflow */
+  }
+  
+  .service-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* This maintains aspect ratio while covering the area */
+    object-position: center;  /* Centers the image */
+  }
+  
+  /* Make cards equal height */
+  .service-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .service-card .card-content {
+    flex-grow: 1;
+  }
+
+  /* Photo gallery card image standardization */
+  .gallery-card .card-image {
+    height: 220px;  /* Fixed height for consistency */
+    overflow: hidden;  /* Hide overflow */
+  }
+  
+  .gallery-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Maintains aspect ratio while covering area */
+    object-position: center;  /* Centers the image */
+    transition: transform 0.3s ease;  /* Smooth zoom effect on hover */
+  }
+  
+  .gallery-card .card-image img:hover {
+    transform: scale(1.05);  /* Slight zoom on hover */
+  }
+  
+  /* Make gallery cards equal height */
+  .gallery-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .gallery-card .card-content {
+    flex-grow: 1;
+  }
