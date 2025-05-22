@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 // Load models
 const Service = require("./models/Service");
 const Setting = require("./models/Setting");
+const Gallery = require("./models/Gallery");
 
 // Load env vars
 dotenv.config({ path: "./.env" });
@@ -54,7 +55,7 @@ const services = [
     description:
       "Gentle cleaning of your pet's teeth with pet-safe toothpaste to promote dental health and fresh breath.",
     price: 12.0,
-    duration: 10,
+    duration: 15,
     petType: ["dog", "cat"],
     image: "/img/service-teeth.jpg",
   },
@@ -67,6 +68,17 @@ const services = [
     petType: ["dog", "cat"],
     image: "/img/service-flea.jpg",
   },
+];
+
+const galleryMedia = [
+  { url: "/uploads/1747877314068.jpg", type: "image", category: "general", order: 0, isActive: true },
+  { url: "/uploads/1747877314078.jpg", type: "image", category: "general", order: 1, isActive: true },
+  { url: "/uploads/1747877314079.jpg", type: "image", category: "general", order: 2, isActive: true },
+  { url: "/uploads/1747877314080.jpg", type: "image", category: "general", order: 3, isActive: true },
+  { url: "/uploads/1747877314099.jpg", type: "image", category: "general", order: 5, isActive: true },
+  { url: "/uploads/1747877361045.jpg", type: "image", category: "general", order: 6, isActive: true },
+  { url: "/uploads/1747877030854.mp4", type: "video", category: "general", order: 7, isActive: true },
+  { url: "/uploads/1747878756407.mp4", type: "video", category: "general", order: 8, isActive: true },
 ];
 
 // Sample settings data
@@ -86,10 +98,12 @@ const importData = async () => {
     // Clear the existing data
     await Service.deleteMany();
     await Setting.deleteMany();
+    await Gallery.deleteMany();
 
     // Insert new data
     await Service.create(services);
     await Setting.create(settings);
+    await Gallery.create(galleryMedia);
 
     console.log("Data Imported!");
     process.exit();
