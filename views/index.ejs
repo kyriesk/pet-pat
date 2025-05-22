@@ -72,20 +72,21 @@
                                 <div class="card-image">
                                     <img src="<%= service.image %>" alt="<%= service.name %>">
                                 </div>
-                            <% } %>
-                            <div class="card-content">
-                                <span class="card-title teal-text text-darken-1">
-                                    <%= service.name %>
-                                </span>
-                                <p><strong>$<%= service.price.toFixed(2) %></strong> &middot; <%= service.duration %>
-                                        mins</p>
-                                <p>
-                                    <%= service.description %>
-                                </p>
-                            </div>
-                            <div class="card-action">
-                                <a href="/services/<%= service._id %>">Learn More</a>
-                            </div>
+                                <% } %>
+                                    <div class="card-content">
+                                        <span class="card-title teal-text text-darken-1">
+                                            <%= service.name %>
+                                        </span>
+                                        <p><strong>$<%= service.price.toFixed(2) %></strong> &middot; <%=
+                                                service.duration %>
+                                                mins</p>
+                                        <p>
+                                            <%= service.description %>
+                                        </p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="/services/<%= service._id %>">Learn More</a>
+                                    </div>
                         </div>
                     </div>
                     <% }) %>
@@ -124,28 +125,33 @@
         </div>
 
         <div class="row">
-            <% if (photos && photos.length > 0) { %>
-                <% photos.forEach(item => { %>
+            <% if (photos && photos.length> 0) { %>
+                <% photos.forEach(item=> { %>
                     <div class="col s12 m6 l4">
                         <div class="card hoverable">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img src="<%= item.url %>" class="responsive-img materialboxed" alt="Pet grooming photo">
+                                <img src="<%= item.url %>" class="responsive-img materialboxed"
+                                    alt="Pet grooming photo">
                             </div>
                             <div class="card-content">
-                                <span class="card-title grey-text text-darken-4"><%= item.title || 'Pet Grooming' %></span>
-                                <p><%= item.description || 'Beautiful grooming results' %></p>
+                                <span class="card-title grey-text text-darken-4">
+                                    <%= item.title || 'Pet Grooming' %>
+                                </span>
+                                <p>
+                                    <%= item.description || 'Beautiful grooming results' %>
+                                </p>
                             </div>
                         </div>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <div class="col s12 center">
-                    <div class="card-panel grey lighten-4">
-                        <i class="material-icons large grey-text">photo_library</i>
-                        <p class="grey-text">No photos available in gallery yet.</p>
-                    </div>
-                </div>
-            <% } %>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="col s12 center">
+                                <div class="card-panel grey lighten-4">
+                                    <i class="material-icons large grey-text">photo_library</i>
+                                    <p class="grey-text">No photos available in gallery yet.</p>
+                                </div>
+                            </div>
+                            <% } %>
         </div>
 
         <!-- Video Gallery -->
@@ -157,8 +163,8 @@
         </div>
 
         <div class="row">
-            <% if (videos && videos.length > 0) { %>
-                <% videos.forEach(item => { %>
+            <% if (videos && videos.length> 0) { %>
+                <% videos.forEach(item=> { %>
                     <div class="col s12 m6">
                         <div class="card hoverable">
                             <div class="card-image">
@@ -167,20 +173,24 @@
                                 </video>
                             </div>
                             <div class="card-content">
-                                <span class="card-title grey-text text-darken-4"><%= item.title || 'Pet Grooming Video' %></span>
-                                <p><%= item.description || 'Watch our grooming process' %></p>
+                                <span class="card-title grey-text text-darken-4">
+                                    <%= item.title || 'Pet Grooming Video' %>
+                                </span>
+                                <p>
+                                    <%= item.description || 'Watch our grooming process' %>
+                                </p>
                             </div>
                         </div>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <div class="col s12 center">
-                    <div class="card-panel grey lighten-4">
-                        <i class="material-icons large grey-text">videocam</i>
-                        <p class="grey-text">No videos available in gallery yet.</p>
-                    </div>
-                </div>
-            <% } %>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="col s12 center">
+                                <div class="card-panel grey lighten-4">
+                                    <i class="material-icons large grey-text">videocam</i>
+                                    <p class="grey-text">No videos available in gallery yet.</p>
+                                </div>
+                            </div>
+                            <% } %>
         </div>
     </div>
 </div>
@@ -198,27 +208,33 @@
             <div class="col s12 m4">
                 <div class="card-panel">
                     <i class="material-icons medium teal-text">format_quote</i>
-                    <p>"My dog used to be so afraid of grooming, but now he gets excited when we visit Pet-Pat! The
-                        staff is amazing with anxious pets."</p>
-                    <p class="right"><strong>- Sarah M.</strong></p>
+                    <div class="testimonial-content">
+                        <p>"My dog used to be so afraid of grooming, but now he gets excited when we visit Pet-Pat! The
+                            staff is amazing with anxious pets."</p>
+                        <p class="right"><strong>- Sarah M.</strong></p>
+                    </div>
                 </div>
             </div>
 
             <div class="col s12 m4">
                 <div class="card-panel">
                     <i class="material-icons medium teal-text">format_quote</i>
-                    <p>"They did a fantastic job with my Persian cat. The groomer was knowledgeable and gentle. Will
-                        definitely return!"</p>
-                    <p class="right"><strong>- David L.</strong></p>
+                    <div class="testimonial-content">
+                        <p>"They did a fantastic job with my Persian cat. The groomer was knowledgeable and gentle. Will
+                            definitely return!"</p>
+                        <p class="right"><strong>- David L.</strong></p>
+                    </div>
                 </div>
             </div>
 
             <div class="col s12 m4">
                 <div class="card-panel">
                     <i class="material-icons medium teal-text">format_quote</i>
-                    <p>"The online booking system is so convenient, and the groomers are professional and caring. My
-                        Shih Tzu looks amazing!"</p>
-                    <p class="right"><strong>- Emily R.</strong></p>
+                    <div class="testimonial-content">
+                        <p>"The online booking system is so convenient, and the groomers are professional and caring. My
+                            Shih Tzu looks amazing!"</p>
+                        <p class="right"><strong>- Emily R.</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,7 +247,8 @@
         <div class="row">
             <div class="col s12 center">
                 <h4 class="white-text">Ready to pamper your pet?</h4>
-                <p class="flow-text grey-text text-lighten-4">Create an account today and book your first appointment!</p>
+                <p class="flow-text grey-text text-lighten-4">Create an account today and book your first appointment!
+                </p>
                 <div class="section">
                     <a href="/users/register" class="btn-large waves-effect waves-light white teal-text text-darken-1">
                         <i class="material-icons left">pets</i>Sign Up Now
